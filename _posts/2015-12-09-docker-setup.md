@@ -2,7 +2,7 @@
 layout: post
 title: "Use Docker Containers For Portability: Basic Setup"
 date: 2015-12-09T18:52:10+00:00
-updated: 2016-02-19T07:25:12+00:00
+updated: 2016-02-20T19:19:04+00:00
 ---
 
 [Once I read this](https://www.reddit.com/r/DataHoarder/comments/3ve1oz/torrent_client_that_can_handle_lots_of_torrents/cxndyzx), I was hooked:
