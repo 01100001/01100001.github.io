@@ -1,0 +1,27 @@
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           '/:title/'
+# relative_permalinks: true # Depreciated in Jekyll 3.0
+
+
+# Setup
+title:               '01100001'
+tagline:             'On bittorrent & video encoding'
+description:         "01100001's notes on bittorrent & video encoding."
+url:                 'http://01100001.github.io'
+baseurl:             'http://01100001.github.io'
+paginate:            5
+
+# About/contact
+author:
+  name:              '01100001'
+  url:
+  email:
+
+# Custom vars
+version:             1.0.0
+postfiles:           '/public/post-files'
+
+github:
+  repo:              https://github.com/01100001/01100001.github.io

@@ -1,0 +1,128 @@
+* Now talking on ##rtorrent
+* Topic for ##rtorrent is: Unoffical support channel http://community.rutorrent.org/RtorrentIrc | Ask your question - be patient | Use 0bin.net for anything over 3 lines
+* Topic for ##rtorrent set by pyroscope (Fri Jul 24 04:24:31 2015)
+-ChanServ- [##rtorrent] Welcome to ##rtorrent. Please read the topic. For ruTorrent, use #rutorrent or http://forums.rutorrent.org/
+* Channel ##rtorrent url: http://wiki.rtorrent.org/RtorrentIrc
+
+
+<01100001> Hi, I am setting up rtorrent on my own dedicated server, and am following this tutorial: https://jes.sc/kb/rTorrent+ruTorrent-Seedbox-Guide.php
+<01100001> The tutorial suggests that I install xmlrpc-c from source rather than via apt-get (Ubuntu here)
+<01100001> Is there any specific reason?
+<01100001> According to rtorrent wiki 1.07 or later is needed: https://github.com/rakshasa/rtorrent/wiki/RPC-Setup-XMLRPC -- so why from source and not the ubuntu repositories?
+<NoSubstitute> Probably because it wants access to the sources when compiling rtorrent.
+<01100001> NoSubstitute: So, would I be absolutely fine with the one from repos? How'd you do it?
+<pyroscope> https://bintray.com/pyroscope/rtorrent-ps/rtorrent-ps/view#files
+<01100001> pyroscope: Oh thank you very much. I will still try to learn the hard stuff, and if it's too hard (I hope not), I will got with the packages.
+<01100001> I read that "XML-RPC is required for communication between rTorrent and ruTorrent." So if I don't plan on using ruTorrent, don't have have to install XML-RPC?
+<Lokie> or anything else that uses it like pyroscope's version I guess
+<KannOx> 01100001, that's correct, but if you want to use the pyroscope tools (and believe me, you do), you'll need xmlrpc
+<01100001> Oh. I want to check out pyroscope tools, but where's the documentation? I couldn't find it; is there any? (for installation and usage)
+<KannOx> https://pyrocore.readthedocs.org/en/latest/
+<01100001> KannOx: Ok. looks like I'll need to do a lot of reading to understand what Pyroscope does. Which should I go with -- rtorrent + pyroscope or rtorrent-ps?
+<01100001> what's your setup like? (do you use ruTorrent?)
+<KannOx> rtorrent-ps can be installed separately from pyroscope (and vice versa), but they augment each other
+<KannOx> personally i use rtorrent-ps and pyroscope, no rutorrent
+<01100001> ok. Will read the docs tonight. I will go with the same setup. Thank you very much!
+<01100001> I installed XML-RPC from source following this tutorial: https://jes.sc/kb/rTorrent+ruTorrent-Seedbox-Guide.php#Install-XML-RPC
+<01100001> Anyway to check if it installed properly? I've tried `dpkg -s xmlrpc-c`, `dpkg -s xmlrpc` and `dpkg -l '*xml*'`
+<01100001> None of them show xmlrpc as installed
+<KannOx> you've installed it from source, not using the package manager, so it won't show up in dpkg
+<KannOx> `make install` mostly just copies files to different places on your system
+<KannOx> you'll know if it's not installed if the `./configure --with-xmlrpc-c` for rtorrent fails
+<01100001> Ah, ok!
+<01100001> Does rtorrent-ps have any docs like pyrocore does (https://pyrocore.readthedocs.org/) ?
+<01100001> I mean other than this: https://code.google.com/p/pyroscope/wiki/RtorrentExtended
+<01100001> Also, I am confused as to where I should get the source for rtorrent-ps from. Is it master? I mean, I get the sources for libtorrent and rtorrent from here: http://rakshasa.github.io/rtorrent/
+<01100001> I am unsure as to where I'd find the latest stable release of rtorrent-ps
+<KannOx> 01100001, there are docs on googlecode, but google decided to change up the formatting for no good reason
+<KannOx> if you have vanilla rtorrent already installed, it might be easier to stick with that while things get sorted out
+<01100001> Nope. I am just starting out. Nothing's been installed
+<01100001> KannOx: What do you mean by "it might be easier to stick with that while things get sorted out"? Do you mean until I learn to install, or is there some problem with rtorrent-ps?
+<KannOx> 01100001, you can focus on getting your setup the way you want until the docs are back in a readable state
+<KannOx> they're not difficult to follow, it's just that the change in formatting screws up a lot of stuff, and straight up hides some of it
+<01100001> I think I can manage with the docs in their current state.
+<01100001> I will also look at the source of the docs to see if I am missing anything
+<KannOx> alright then have at it :D https://code.google.com/archive/p/pyroscope/wikis/DebianInstallFromSource.wiki#rTorrent_installation
+<KannOx> there is no source for googlecode's wikis afaik
+<01100001> KannOx: I think there's a copy of it on GitHub
+<KannOx> 01100001, link?
+<01100001> https://github.com/pyroscope/pyroscope/tree/wiki/
+<01100001> https://github.com/pyroscope/pyroscope/blob/wiki/DebianInstallFromSource.md
+<01100001> It just occurred to me. Good right?
+<KannOx> 01100001, awesome, that's exactly what you want
+<KannOx> i didn't think they were up there yet
+<01100001> KannOx: From a quick look at the docs... unlike rtorrent which has stable releases, I'd have to go with master branch for rtorrent-ps' source?
+<KannOx> 01100001, rtorrent-ps is actually a bunch of patches that get applied against rtorrent
+<KannOx> you can pick which version of rtorrent you want to patch during the build process
+<01100001> oh ok, guess I need to do more reading... :P
+
+
+<01100001> As per the wiki docs, it's suggested that I run `./build.sh extend` after `./build.sh all` as it sets up an "extended version with some stability fixes and extension patches" applied. What's that for?
+<01100001> Makes me wonder because it's not done by default
+<01100001> Also does the build script install XML-RPC from source too? (as it does libtorrent and rtorrent)
+<01100001> I guess it does. So forget my last question. (I'd still like an answer for my first.)
+<KannOx> 01100001, that "extended version" is rtorrent-ps
+<KannOx> first it builds it all vanilla, patches it, then builds it again
+
+
+<01100001> I am confused about the 'min_peers' setting in rtorrent config. Default is 40 for download. Does that mean if there are only 2 peers (1 seeder, 1 downloader which'd be me) rtorrent wont start downloading?
+<01100001> To make my question even simpler... with 'min_peers' set to '40' rtorrent won't start downloading if there's only 1 seed? i.e. no download until seeders+leechers >= 40?
+<KannOx> 01100001: the min_peers setting makes rtorrent use more aggressive settings until it finds that number of peers, iirc
+<KannOx> so it'll use peers as soon as they appear, but once it hits 40, it will stop hammering the tracker to find more
+<01100001> KannOx: So is this understanding wrong? https://www.reddit.com/r/seedboxes/comments/44r6ev/what_do_min_peers_and_max_peers_in_rtorrent/czs8vxf
+<KannOx> 01100001: i'm pretty sure that's incorrect, there are other mechanisms for banning bad peers, but that usually relates to bad packets sent and not the speed of the peer
+<01100001> KannOx: So based on what you said, rTorrent will be very aggressive about procuring 'min_peers' and gets less aggressive, but is still on the look out for more peers until it reaches 'max_peers' limit? Am I understanding it right?
+<KannOx> 01100001: yes, i just traced it back in the source code, that's essentially what it does
+<01100001> KannOx: Excellent, that's a relief. Lastly, is there any specific rule/idea that you personally follow to determine the value you set? at least roughly?
+<01100001> (I am on a server with 16 GB RAM, 4-core cpu (8 threads) and 3 TB in RAID 1. I can use half the resources for torrenting, so... I am trying to figure out a reasonably good config.)
+<KannOx> 01100001: the default is fine, I've lowered mine a bit because many of my torrents have a small (ie <40) number of high-speed peers
+<KannOx> for the config as a whole, i'd recommending not changing the defaults unless you actually run into a problem
+<KannOx> rtorrent is pretty lightweight, the two main bottleneck are IO and network
+<01100001> KannOx: Oh, ok. I will leave it the way it is then and see how it goes.
+<KannOx> sometimes the amount of connections spawned can overwhelm low-quality routers, but that's about it
+<01100001> hmmm... ok. Thank you very much, KannOx! :D
+<KannOx> 01100001: in a weird coicendence, i happen to run rtorrent on 8gb of ram with 2 cores, and I haven't had any resource issues :D
+
+<01100001> Hi, despite doing my best, it's unclear to me as to what the 'untied_directory' rule does.
+<01100001> "schedule = untied_directory,5,5,stop_untied="
+<01100001> The rule's description says, "stop those that have been deleted."
+<01100001> So, when I am adding new torrents, I am to add the .torrent file to both watch and untied directories; rtorrent will automatically add the torrent from watch directory and start doing its thing. When I want to delete the torrent, I am to simply delete the copy of the .torrent file from untied directory?
+<01100001> Is that how it works?
+<KannOx> 01100001: untied_directory is the name of the scheduled job, it's arbitrary
+<KannOx> that job scans all torrents, checks if the torrent file tied to it exists, and stops the torrent if it doesn't
+<KannOx> i highly recommend not using that functionality, it's both confusing and annoying
+<pyroscope> in short: delete that crap
+
+<01100001> Hi, I have rtorrent installed on a server. The only thing I need is for a way to organize and view torrents (e.g. by tracker or label). Is something like this possible?
+<korozion> 01100001: the number keys change the way the list is organized
+<korozion> not really sure if that answers your question or not heh
+<01100001> korozion: I think what you talking about is sorting. What I am after is for e.g. viewing torrents from a specific tracker or label only.
+<01100001> That's not possible I guess?
+<Tw|tch> http://community.rutorrent.org/Recipe/Organize%20downloads%20into%20label%20views%20and%20rotate%20through%20them
+<01100001> Tw|tch: I will give it a shot, thanks
+
+<01100001> Hi. Under ~/lib/rtorrent-0.9.6/bin/ what do binaries rtorrent-vanilla, rtorrent, and rtorrent-extended represent? 1. unpatched/original version of rTorrent; 2. original version of rTorrent with patches applied from rTorrent-PS project; 3. rTorrent-PS binary; respectively. Correct?
+<01100001> Hmm... looking at the build script's code, it looks like this now: (1) `rtorrent-vanilla` is the unpatched/original version of rTorrent; (2) Both `rtorrent` and `rtorrent-extended` are the same, and represent rTorrent-PS AKA rTorrent Extended binary. Amirite?
+<01100001> Also, is it pyroscope or pyrocore?
+<KannOx> 01100001, rtorrent is the most recent binary build, ignore it
+<KannOx> use the ~/bin/ symlinks to run things
+<KannOx> pyroscope has been the name for longer so i say it out of habit, but maybe he's tired of getting highlighted all the time :D
+<01100001> lol
+<01100001> So, I don't understand the diff between rtorrent-vanilla and rtorrent (also I checked, rtorrent and rtorrent-extended are the same files; yours is contradicting this finding)
+<01100001> I am just trying to understand each step of the process as best as I can, that's all.
+<KannOx> both build processes make an rtorrent binary, which is copied to rtorrent-vanilla or rtorrent-extended depending on which one you built
+<01100001> Ah, now it makes sense. So when I run `./build.sh all` `rtorrent` binary is copied to `rtorrent-vanilla`, and when I run `./build.sh extend` the new `rtorrent` binary is copied to `rtorrent-extended`; that's it?
+<KannOx> yes
+
+<01100001> Hi, aren't max_peers and max_uploads settings conflicting? I mean, if I set max_peers to 40, rTorrent will connect me to a max of 40 downloaders which mean I can make max 40 uploads at a time. Isn't it? What am I missing here?
+<pyroscope> related != conflicting
+<01100001> pyroscope: How?
+<01100001> I mean, how'd I be able to upload to 100 people per torrent if I am limiting peers to 40?
+<01100001> correction: how'd I be able to make up to 100 uploads per torrent if I am limiting peers to 40?
+<01100001> isn't that conflicting? or I am missing the point, in which case I'd like to know what it is.
+<pyroscope> the point is one is for the scrape, the other a client setting
+<01100001> *reading https://en.wikipedia.org/wiki/Tracker_scrape
+<01100001> pyroscope: Ok. So, rtorrent max/min_peers settings send a quick scrape request to the tracker? And the client setting you are referring to is max_uploads? Or is it the other way around?
+<01100001> Googling didn't help either; nothing good to read on this
+<pyroscope> read the docs, err, source
+<KannOx> 01100001: min/max_peers controls the aggressiveness of scraping to find peers, max_uploads controls how many peer connections are allowed to be made for uploading
