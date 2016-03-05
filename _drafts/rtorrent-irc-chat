@@ -126,3 +126,60 @@
 <01100001> Googling didn't help either; nothing good to read on this
 <pyroscope> read the docs, err, source
 <KannOx> 01100001: min/max_peers controls the aggressiveness of scraping to find peers, max_uploads controls how many peer connections are allowed to be made for uploading
+
+<01100001> Hi, I created a tmux session with rtorrent running using this command: `tmux -2u new -s rtorrent -n rtorrent1 "~/rtorrent1/start; exec bash"`
+<01100001> What'd be a proper way to restart rtorrent now? (rTorrent-PS actually)
+<01100001> This is how I just did it. (1) `ctrl+q` to kill rtorrent (wait till rtorrent closes properly and bash shell is shown); (2) `ctrl+a d` to detatch from tmux; (3) `tmux kill-ses -t rtorrent` to kill tmux session; (4) Run  `tmux -2u new -s rtorrent -n rtorrent1 "~/rtorrent1/start; exec bash"` again. This good?
+<KannOx> did you give rtorrent time to shutdown properly before killing the session?
+<KannOx> in general, if you can avoid killing any processes, that's the better approach
+<01100001> KannOx: No I didn't give it time. There are no torrents in it anyway. I am just playing with it. But how'd I know how much time to give?
+<KannOx> by waiting until rtorrent exits and goes back to the shell
+<01100001> Oh, that it did.
+<KannOx> at which point you should exit out of the bash shell instead of killing
+<01100001> yes, it exactly went that way
+[...]
+<pR0Ps> 01100001: Try this: tmux send-keys -t rtorrent1:rtorrent.0 C-q && while pidof rtorrent > /dev/null; do sleep 0.5`
+<pR0Ps> That will send a "ctrl+q" to the rtorrent process in the rtorrent1 session then wait until it stops
+<pR0Ps> This gives it a chance to shut down nicely
+<KannOx> i'm pretty sure sending two Ctrl-qs will cause it to not shutdown nicely
+<pR0Ps> KannOx: yeah, 2 ctrl-q's does a force quit but just one waits until everything is finished up before exiting.
+<pyroscope> pR0Ps:  except you're missing a ;done
+<KannOx> pR0Ps, yep, just misread the command
+<pR0Ps> whoops, yep, definitely needs "; done" on the end
+SO THE CORRECT COMMAND IS (PROBABLY):
+`tmux send-keys -t rtorrent1:rtorrent.0 C-q && while pidof rtorrent > /dev/null; do sleep 0.5; done`
+
+<01100001> "Deluge is agressive," "Deluge is aggressive with finding peers," "Deluge finds faster peers very quickly after a torrent is added," etc. etc. Do statements such as these hold any truth? I mean, what does Deluge do differently compared to other clients e.g. rtorrent, that makes it better for seeding? (People claim they upload more with Deluge...)
+<hyper_ch> people claim a lot of things
+<hyper_ch> you can also make rtorrent grab more peers
+<hyper_ch> but in the end it's the tracker's decision how many peers are being handed out
+<01100001> I just found this: http://www.torrent-invites.com/showthread.php?t=79685&p=726459&viewfull=1#post726459
+<01100001> And that's the only thing I could find as to how Deluge is agressive.
+<hyper_ch> November 13th, 2010, 09:29 PM
+<01100001> hyper_ch: So, are we talking about min/max_peers and max_uploads in rtorrent config.? Weren't they available back then?
+<01100001> or what do you mean by that timestamp?
+<KannOx> i've heard deluge lies about about how many chunks/peers it needs or something, although i've never seen anyone point to documentation or source code
+<KannOx> generally the conclusions i've seen say that deluge gets more initial upload but doesn't scale well and is less suited to long term seeding
+<KannOx> YMMV, as in all things
+<01100001> hmm...
+
+<01100001> Ok, so which font shows all the symbols shown here: http://i.imgur.com/zbAT9.png
+<01100001> o_O
+<01100001> I am trying to get putty (Windows) to show all symbols; no luck so far
+<01100001> Oh nevermind! https://github.com/pyroscope/pyroscope/blob/wiki/RtorrentExtendedCanvas.md#setting-up-your-terminal
+<pyroscope>  there is more in some recent issue
+<01100001> Ah got it: https://github.com/pyroscope/rtorrent-ps/issues/8
+
+<01100001> Hi, I am trying to reseed some torrents. How do I tell rtorrent where to look (base path) when adding a torrent?
+<01100001> (The location of the file is different from the downloads directory.)
+<hyper_ch> ctrl-k, ctrl-o, ctrl-r, ctrl-s
+<01100001> hyper_ch: Excellent! Was thinking I'd have to use a command :P
+<hyper_ch> stop, set new base dir, rehash, start
+<01100001> got it, thank you very much
+
+<01100001> hard links vs symbolic links cross-seeding torrents? (Setting base location for each torrent is proving very difficult when reseeding a bunch of torrents. So instead I can have hard/sym links of the files where the torrent client will look for them by default.)
+<01100001> which one would you guys recommend?
+<01100001> I am asking because, I know either would work, but I might be missing some edge cases.
+<hyper_ch> no edge cases IMHO
+<01100001> hyper_ch, ok, going with sym links then
+READ: http://askubuntu.com/a/665947
