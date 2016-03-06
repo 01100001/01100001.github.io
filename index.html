@@ -4,8 +4,8 @@ title: Home
 ---
 
 <div class="posts">
-  {% comment %} {% for post in paginator.posts %} {% endcomment %}
-  {% comment %} {% for post in site.posts reversed %} {% endcomment %}
+  {% comment %} `for post in paginator.posts` {% endcomment %}
+  {% comment %} `for post in site.posts reversed` {% endcomment %}
   {% assign sorted_posts = site.posts | sort:"order" %}
   {% for post in sorted_posts reversed %}
   <div class="post">
