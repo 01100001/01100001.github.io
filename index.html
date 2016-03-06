@@ -3,6 +3,11 @@ layout: default
 title: Home
 ---
 
+{% assign sorted_posts = site.posts | sort:"order" %}
+{% for node in sorted_posts %}
+  <li><a href="{{node.url}}">{{node.title}}</a></li>
+{% endfor %}
+
 <div class="posts">
   {% comment %} {% for post in paginator.posts %}{% endfor %} {% endcomment %}
   {% for post in site.posts reversed %}
