@@ -98,7 +98,7 @@ The [official docker Ubuntu image tags](https://github.com/docker-library/docs/b
 
 To launch a container in the base (Ubuntu Server) image we downloaded earlier, issue the command:
 
-	docker run -d -i -t --name="pinkyblog" -h="pinkyblog"  -p 31625:31625 -p 31625:31625/udp -v /home/pinky:/pinky --restart=always ubuntu:trusty /bin/bash
+	docker run -d -i -t --name="pinkyblog" -h="pinkyblog"  -p 31625:31625 -p 31625:31625/udp -v /home/pinky/assets:/assets --restart=always ubuntu:trusty /bin/bash
 
 - `docker run` to launch an `ubuntu:trusty` image and run the command `/bin/bash` (launches bash shell) inside a new container
 

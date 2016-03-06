@@ -14,7 +14,7 @@ To put it simply, we'll be running the Deluge daemon `deluged` (headless, i.e. n
 
 For portability and virtualization, we'll be running Deluge headless (`deluged`) within a Docker container. Here's the command I use to create a docker container for this purpose:
 
-	docker run -d -i -t --name="deluge1" -h="deluge1" -p 54321:54321 -p 54321:54321/udp -p 54322:54322 -p 54322:54322/udp -v /home/pinky/torrents:/torrents -e "LANG="en_US.UTF-8"" -e "LANGUAGE="en_US:en"" --restart=always ubuntu:trusty /bin/bash
+	docker run -d -i -t --name="deluge" -h="deluge" -p 54321:54321 -p 54321:54321/udp -p 54322:54322 -p 54322:54322/udp -v /home/pinky/torrents:/torrents -e "LANG="en_US.UTF-8"" -e "LANGUAGE="en_US:en"" --restart=always ubuntu:trusty /bin/bash
 
 > Make sure your firewall is configured to allow traffic through the port(s) mentioned in the command. In my case, I'd just have to run this command on the host beforehand:
 > 
