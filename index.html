@@ -5,7 +5,8 @@ title: Home
 
 <div class="posts">
   {% comment %} {% for post in paginator.posts %}{% endfor %} {% endcomment %}
-  {% for post in site.posts | sort:"order" %}
+  {% assign sorted_posts = site.posts | sort:"order" %}
+  {% for post in sorted_posts %}
   <div class="post">
     <h1 class="post-title">
       <a href="{{ post.url }}">
