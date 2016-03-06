@@ -3,7 +3,7 @@ layout: post
 title: "Basic rTorrent Configuration Guide"
 date: 2016-02-11T19:45:39+00:00
 updated: 2016-02-20T19:19:23+00:00
-order: 5
+order: 6
 ---
 
 **NOTE:** The following settings are configured for a server with: 8 GB RAM, 3.40 GHz dual-core processor (4 threads), 2 TB storage and 200 Mbps - 800 Mbps bandwidth (let's just say ~ 300 Mbps), and considering that there are mostly good peers (with excellent internet speeds) on private trackers.
