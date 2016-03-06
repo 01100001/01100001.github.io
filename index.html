@@ -4,7 +4,7 @@ title: Home
 ---
 
 {% assign sorted_posts = site.posts | sort:"order" %}
-{% for node in sorted_posts %}
+{% for node in sorted_posts reversed %}
   <li><a href="{{node.url}}">{{node.title}}</a></li>
 {% endfor %}
 
