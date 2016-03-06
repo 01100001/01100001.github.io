@@ -7,11 +7,11 @@ title: Home
   {% comment %} `for post in paginator.posts` {% endcomment %}
   {% comment %} `for post in site.posts reversed` {% endcomment %}
   {% assign sorted_posts = site.posts | sort:"order" %}
-  {% for post in sorted_posts reversed %}
+  {% for node in sorted_posts reversed %}
   <div class="post">
     <h1 class="post-title">
       <a href="{{ post.url }}">
-        {{ post.title }}
+        {{ node.title }}
       </a>
     </h1>
 
