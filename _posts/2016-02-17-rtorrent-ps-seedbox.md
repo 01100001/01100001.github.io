@@ -3,6 +3,7 @@ layout: post
 title: "Set Up Seedbox With rTorrent-PS & PyroCore"
 date: 2016-02-17T11:12:01+00:00
 updated: 2016-02-20T19:19:37+00:00
+order: 3
 ---
 
 > **NOTE:** This tutorial assumes that you logged with a normal user account with sudo privileges, i.e. not as root user. This is necessary if you going to be installing rTorrent-PS with PyroCore CLI tools. PyroCore was designed to prevent installation as the root user.

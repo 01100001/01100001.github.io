@@ -3,15 +3,16 @@ layout: post
 title: "Use Docker Containers For Portability: Basic Setup"
 date: 2015-12-09T18:52:10+00:00
 updated: 2016-02-20T19:19:04+00:00
+order: 2
 ---
 
 [Once I read this](https://www.reddit.com/r/DataHoarder/comments/3ve1oz/torrent_client_that_can_handle_lots_of_torrents/cxndyzx), I was hooked:
 
 > I seed 85,000 torrents using Docker with 20 Transmission instances. I just moved to a bigger server and Docker is great because I just imported my containers so no torrent rechecking :)
 
-If you've ever moved your torrents between seedboxes or servers (self-hosted), you'd know how painfully long the process can be. So, here's my notes on setting up docker to host your application(s).
+If you've ever moved your torrents between seedboxes or servers (self-hosted), you'd know how painfully long the process can be. So, here's my notes on setting up docker to host my application(s).
 
-**Pre-requisite:** Ubuntu Server 14.04 LTS 64-bit installed.
+**Pre-requisite:** Host system running Ubuntu Server 14.04 LTS 64-bit.
 
 ### Install Docker
 
@@ -189,7 +190,7 @@ But this doesn't work in a docker container, and [here's why](http://askubuntu.c
 
 To put it simply, while you can generate locales using `locale-gen`, it isn't possible to configure the container OS for the new locale to take effect. You'd have to set the environment variables `LANG` and `LANGUAGE` at the time of creation of the container using the `-e` flags in the `docker run` command. Like so:
 
-	docker run -d -i -t --name="pinkyblog" -h="pinkyblog"  -p 31625:31625 -p 31625:31625/udp -v /home/pinky:/pinky -e "LANG="en_US.UTF-8"" -e "LANGUAGE="en_US:en"" --restart=always ubuntu:trusty /bin/bash
+	docker run -d -i -t --name="pinkyblog" -h="pinkyblog"  -p 31625:31625 -p 31625:31625/udp -v /home/pinky/assets:/assets -e "LANG="en_US.UTF-8"" -e "LANGUAGE="en_US:en"" --restart=always ubuntu:trusty /bin/bash
 
 Then once the container is created, `attach` to it, and in the container, generate the requisite locale(s) like so:
 
@@ -222,17 +223,24 @@ That's it, but let's confirm just to be sure:
 	en_US.utf8
 	POSIX
 
-**NOTE:** It'd be a good idea to run the `locale` and `locale -a` commands on the host to see how it's configured as you'd probably want the same locales in your container(s).
+**NOTE:** It'd be a good idea to run the `locale` and `locale -a` commands on the host to see how it's configured as you'd probably want the same in your container(s).
 
 ### (Optional) Sudo User Instead Of Root User
 
 Another thing that I do as soon as I set up my Docker container is create a new user with `sudo` privileges and use that user instead of the root user. As in...
 
-	adduser pinky
-	adduser pinky sudo
-	su pinky
+	adduser dinky
+	adduser dinky sudo
+	su dinky
 
 This seems especially important if you are mounting data volume(s) in your container. You may face permission issues on the host while modifying files and directories created by those applications being run by the root user in the container. Run those applications as a normal user with sudo privileges and you'll never have to turn back again.
+
+**TIP!** For easy access to the mounted data volume via command-line within the container, and better sharing of data between the host and the container, I normally set the home directory of the sudo user (in the container) to a directory inside the mounted volume, like so:
+	
+	# /home/pinky/assets (Host) --> /assets (Container)
+	adduser --home /assets/dinky dinky
+
+This way I'll have full access to any of the user's files and applications from the host, and no permission issues whatsoever.
 
 ### Sources
 

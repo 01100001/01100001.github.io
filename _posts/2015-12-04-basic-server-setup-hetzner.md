@@ -3,6 +3,7 @@ layout: post
 title: "Getting Started On Hetzner & Basic Server Setup"
 date: 2015-12-04T05:42:06+00:00
 updated: 2016-02-20T19:18:56+00:00
+order: 1
 ---
 
 Hetzner provides an informative wiki with [detailed guides](http://wiki.hetzner.de/index.php/Root_Server_Guide/en). That should be enough to get you started, if are comfortable with CLI and have fiddled with servers before.
