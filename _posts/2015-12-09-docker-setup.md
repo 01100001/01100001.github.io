@@ -242,6 +242,13 @@ This seems especially important if you are mounting data volume(s) in your conta
 
 This way I'll have full access to any of the user's files and applications from the host, and no permission issues whatsoever.
 
+### Misc. Notes
+
+- Always combine `apt-get update` with `apt-get install` in the same command when you need to run the commands in a container. Using `apt-get update` alone in a container causes caching issues and subsequent `apt-get install` instructions may fail. [More info here](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#apt-get). So this is how it should be done:
+
+		sudo add-apt-repository ppa:deluge-team/ppa
+		sudo apt-get update && sudo apt-get -y install deluged deluge-console
+
 ### Sources
 
 - Docker Docs: [Installation on Ubuntu](https://docs.docker.com/engine/installation/ubuntulinux/)
