@@ -2,7 +2,7 @@
 layout: post
 title: "Set Up Seedbox With rTorrent"
 date: 2016-02-11T19:42:44+00:00
-updated: 2016-02-20T19:19:19+00:00
+updated: 2016-03-07T19:19:56+00:00
 order: 4
 ---
 
@@ -32,7 +32,7 @@ XML-RPC is required for communication between rTorrent and its plugins (like ruT
 
 Before you can compile and install a package from source (`xmlrpc-c` in our case), you need to make sure that all its dependencies are installed. There are at least three straightforward ways to do so:
 
-1. Assuming a maintained or fairly recent version of the package is in Ubuntu's software repositories (it is, as a source package, [`xmlrpc-c`](http://packages.ubuntu.com/source/trusty/xmlrpc-c)), run:
+1. Assuming a maintained or fairly recent version of the package is in Ubuntu's software repositories (in our case it is; source package [`xmlrpc-c`](http://packages.ubuntu.com/source/trusty/xmlrpc-c)), run:
 
 		sudo apt-get build-dep xmlrpc-c
 
@@ -207,9 +207,9 @@ Then get the source code for the latest stable release of rTorrent from the [off
 
 Make the necessary rTorrent directories:
 
-	mkdir -p ~/torrents/rtorrent/{session,watch}
+	mkdir -p ~/downloads/{session,watch}
 
-(The `-p` flag makes nested directories i.e., it will create the directory `downloads` and nest directories `session` and `watch` within it. Choose a location of your choice, e.g. `~/downloads/{session,watch}`)
+(The `-p` flag makes nested directories as necessary i.e., it will create the directory `downloads` and nest directories `session` and `watch` within it. You may choose any location of your choice.
 
 ### Configure rTorrent
 
@@ -226,7 +226,7 @@ Check if rTorrent starts without issues:
 
 	rtorrent
 
-If you see rTorrent's text UI, you are good to go. Close rTorrent by pressing `Ctrl + q`.
+If you see rTorrent's text UI, you are good to go. Shutdown rTorrent by pressing `Ctrl + q`.
 
 Let's start rTorrent in a screen session:
 
@@ -247,9 +247,9 @@ You might want to delete all the source code you'd downloaded for compiling pack
 	sudo rm -rf ~/tmp
 	mkdir ~/tmp
 
-And configure `ufw` to allow traffic through the port(s) defined in our rTorrent configuration (see rtorrent.rc):
+And configure `ufw` to allow traffic through the port(s) defined in our rTorrent configuration (see rtorrent.rc). For example:
 
-	ufw allow 49164
+	sudo ufw allow 54321
 
 ### Sources
 
