@@ -76,7 +76,7 @@ Start `deluge-console`:
 
 	deluge-console -c /torrents/deluge/.config
 
-To [connect with the daemon](http://dev.deluge-torrent.org/wiki/UserGuide/ThinClient#Console), use the `connect` command in deluge-console::
+To [connect to the daemon](http://dev.deluge-torrent.org/wiki/UserGuide/ThinClient#Console), use the `connect` command in deluge-console::
 
 	connect 127.0.0.1:54321
 
@@ -93,7 +93,9 @@ Now would be a good time to restart (stop, then start) the daemon for the config
 	killall deluged
 	deluged -p 54321 -c /torrents/deluge/.config
 
-If you get *"command not found"* error on running `killall`, you'll have to install the `psmisc` package first. To do so, run `sudo apt-get update && apt-get -y install psmisc`.
+If you get *"command not found"* error on running `killall`, you'll have to install the `psmisc` package first. To do so, run:
+
+	sudo apt-get update && apt-get -y install psmisc
 
 ### Client Setup
 
