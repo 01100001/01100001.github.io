@@ -95,7 +95,7 @@ Now would be a good time to restart (stop, then start) the daemon for the config
 
 If you get *"command not found"* error on running `killall`, you'll have to install the `psmisc` package first. To do so, run:
 
-	sudo apt-get update && apt-get -y install psmisc
+	sudo apt-get update && sudo apt-get -y install psmisc
 
 ### Client Setup
 
