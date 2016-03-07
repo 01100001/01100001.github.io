@@ -535,3 +535,7 @@ a.pagination-item:hover {
   margin-right: auto;
   max-width: 100%;
 }
+
+code { white-space: pre-wrap; }
+pre { word-wrap: normal; }
+pre code { white-space: inherit; }
