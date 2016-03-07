@@ -64,33 +64,36 @@ Start the Deluge daemon; this creates the config directory and populates it with
 
 - We also used the `-c` flag to set a different config. location for our Deluge instance (default is `~/.config/deluge`). As you can see, I've asked for the config. to be stored at `~/.config` as the default location in our case would be `/torrents/deluge/.config/deluge`, which doesn't look very pretty. All our torrents and downloads will also be stored under `/torrents/deluge` directory as we'll configure in the thin-client later.
 
-- Similarly, you can run multiple instances of Deluge simultaneously, if you need to, by passing different ports and config. locations while starting the daemon each time.
+- Similarly, you can run multiple instances of Deluge simultaneously, if you need to, by passing different ports and directories while starting the daemon each time.
 
 ### Basic Deluge Daemon Config.
 
 [Add new user](http://dev.deluge-torrent.org/wiki/UserGuide/Authentication) to the authentication file located in the config. directory:
 
-	echo "dinky:PaSsWoRD123:10" >> /torrents/deluge1/.config/auth
+	echo "dinky:PaSsWoRD123:10" >> /torrents/deluge/.config/auth
 
-Open `deluge-console` and [connect with the daemon](http://dev.deluge-torrent.org/wiki/UserGuide/ThinClient#Console):
+Start `deluge-console`:
 
-	deluge-console -c /torrents/deluge1/.config
+	deluge-console -c /torrents/deluge/.config
+
+To [connect with the daemon](http://dev.deluge-torrent.org/wiki/UserGuide/ThinClient#Console), use the `connect` command in deluge-console::
+
 	connect 127.0.0.1:54321
 
-Normally you could just run `deluge-console` and you'd be automatically connected to the daemon. But as we are using different port and config. location, we need to pass them along in two commands.
+Normally you could just run `deluge-console` and you'd be automatically connected to the locally running Deluge daemon instance. Since we are using different port and config. location, we need to provide that information in two commands as shown above.
 
-In the same console screen, configure the daemon to allow remote connections, verify the same, and then exit:
+In the same console screen, configure the daemon to allow remote connections, then verify the same, and exit:
 
 	config -s allow_remote True
-	config allow_remote # TO VERIFY
+	config allow_remote
 	exit
 
 Now would be a good time to restart (stop, then start) the daemon for the config. changes to take effect:
 
 	killall deluged
-	deluged -p 54321 -c /torrents/deluge1/.config
+	deluged -p 54321 -c /torrents/deluge/.config
 
-If you get *"command not found"* error on running `killall`, you'll first have to install the `psmisc` package. To do so, run `apt-get update && apt-get -y install psmisc`.
+If you get *"command not found"* error on running `killall`, you'll have to install the `psmisc` package first. To do so, run `sudo apt-get update && apt-get -y install psmisc`.
 
 ### Client Setup
 
@@ -132,7 +135,7 @@ If you don't disconnect from the remote daemon on the server properly, you could
 
 With the basic stuff out of the way, we are ready to deal with the actual configuration.
 
-(May come at a later time. Meanwhile, take a look at [my notes on configuring rTorrent]({% post_url 2016-02-12-rtorrent-rc-config %}). It should be of some help with configuring Deluge as well.)
+(This may come at a later time. Meanwhile, take a look at [my notes on configuring rTorrent]({% post_url 2016-02-12-rtorrent-rc-config %}). It should be of some help with figuring out the configuration for Deluge as well.)
 
 ### Sources & Further Reading
 
