@@ -165,8 +165,6 @@ With the basic stuff out of the way, we are ready to deal with the actual config
 
 - Jesse Schoff's [rTorrent + ruTorrent Configuration Guide](https://jes.sc/kb/rTorrent+ruTorrent-Seedbox-Guide.php)
 
-- GitHub Repository: [Deluge ltConfig Plugin](https://github.com/ratanakvlun/deluge-ltconfig)
-
 
 <!--
 
