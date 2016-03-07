@@ -10,13 +10,13 @@ From the [official Deluge wiki](http://dev.deluge-torrent.org/wiki/UserGuide/Thi
 
 > Deluge can be setup in such a way that a Deluge daemon, *deluged*, can be running on a central computer, *server*, which can then be accessed and controlled by other computers, *clients*, using one of Deluge's UIs.
 
-To put it simply, we'll be running the Deluge daemon `deluged` (headless, i.e. no GUI) on a server and connect to it via Deluge (with GUI) installed on our computer. The latter acts as an interface to the daemon running on the server.
+To put it simply, we'll be running the Deluge daemon `deluged` (headless, i.e. no GUI) on a server and connect to it remotely via Deluge (with GUI) installed on our computer. The latter acts as an interface to the daemon running on the server.
 
-For portability and virtualization, we'll be running Deluge headless (`deluged`) within a Docker container. Here's the command I use to create a docker container for this purpose:
+We'll be running the Deluge daemon (`deluged`) within a Docker container on the server. Here's the command I use to create the docker container for this purpose:
 
 	docker run -d -i -t --name="deluge" -h="deluge" -p 54321:54321 -p 54321:54321/udp -p 54322:54322 -p 54322:54322/udp -v /home/pinky/torrents:/torrents -e "LANG="en_US.UTF-8"" -e "LANGUAGE="en_US:en"" --restart=always ubuntu:trusty /bin/bash
 
-> Make sure your firewall is configured to allow traffic through the port(s) mentioned in the command. In my case, I'd just have to run this command on the host beforehand:
+> Make sure your firewall is configured to allow traffic through the port(s) mentioned in the command. Going by the example above, I'd just have to run this command on the host beforehand:
 > 
 > 	sudo ufw allow 54321 && sudo ufw allow 54322
 > 

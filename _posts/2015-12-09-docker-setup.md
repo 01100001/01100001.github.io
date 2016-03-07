@@ -2,7 +2,7 @@
 layout: post
 title: "Use Docker Containers For Portability: Basic Setup"
 date: 2015-12-09T18:52:10+00:00
-updated: 2016-02-20T19:19:04+00:00
+updated: 2016-03-06T19:15:26+00:00
 order: 2
 ---
 
