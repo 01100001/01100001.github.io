@@ -178,7 +178,7 @@ The `exec bash` keeps your `tmux` window open if rTorrent exits, which allows yo
 > 
 > 	tmux -2u new -s rtorrent -n rtorrent2 "~/rtorrent2/start; exec bash"
 > 
-> Then all you have to do is switch windows to access different rTorrent instances.
+> Then all you have to do is switch windows in the tmux session to access different rTorrent instances.
 
 ### Sources
 
