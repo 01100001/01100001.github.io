@@ -2,7 +2,7 @@
 layout: post
 title: "Set Up Seedbox With Deluge: Server & Thin Client Config."
 date: 2015-12-14T17:21:27+00:00
-updated: 2016-03-07T18:53:10+00:00
+updated: 2016-03-08T11:31:56+00:00
 order: 3
 ---
 
