@@ -109,6 +109,16 @@ First, create directories for the instance `rtorrent1`, then get the simple star
 	chmod a+x ./start
 
 > Instead of naming the rTorrent instances ambiguously such as rtorrent1, rtorrent2, etc., I'd recommend naming them after the category of torrents or the tracker.
+> 
+> And if you plan to take this route, you could set the sudo user's home directory to `/torrents/rtorrent` as well. That is, instead of this as detailed in one of the earliest steps:
+> 
+> 	adduser --home /torrents/rtbox dinky
+> 
+> Do this:
+> 
+> 	adduser --home /torrents/rtorrent dinky
+> 
+> Reason being, `/torrents/rtorrent/rtorrent1` doesn't look pretty or organized; `/torrents/rtorrent/movies` does.
 
 ### rTorrent Configuration
 
