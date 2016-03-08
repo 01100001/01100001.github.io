@@ -6,8 +6,6 @@ updated: 2016-02-20T19:19:37+00:00
 order: 5
 ---
 
-> **NOTE:** This tutorial assumes that you logged with a normal user account with sudo privileges, i.e. not as root user. This is necessary if you going to be installing rTorrent-PS with PyroCore CLI tools. PyroCore was designed to prevent installation as the root user.
-> 
 > The [rTorrent seedbox setup guide]({% post_url 2016-02-12-rtorrent-seedbox %}) is also the basis of this guide, so please go and get the gist of it first.
 
 Now, let's begin by creating a Docker container on the server in which to run rTorrent-PS (or simply, rTorrent):
@@ -36,7 +34,7 @@ First things first:
 		adduser dinky sudo
 		su dinky
 
-	Reason: In Docker containers, the commands are run as root user by default. This could cause permission issues with shared volumes. For example, when I start rTorrent as root user in the container, the files and directories rTorrent creates (e.g. session and downloads), for some weird reason, cannot be modified on the host by the user that runs the Docker container. I faced no issues running rTorrent as a non-root user, hence this is preferred. Also, I use a different username from that of the host to avoid confusion.
+	Reason: In Docker containers, the commands are run as root user by default. This could cause permission issues with shared volumes. For example, when I start rTorrent as root user in the container, the files and directories rTorrent creates (e.g. session and downloads), for some weird reason, cannot be modified on the host by the user that runs the Docker container. I faced no issues running rTorrent as a non-root user, hence this is preferred. Besides, you must do this if you going to be installing rTorrent-PS with PyroCore CLI tools. PyroCore was designed to prevent installation as the root user. Also, I use a different username for the container to avoid confusion.
 
 Install the required development tools and just the dependencies required for compiling XML-RPC, libTorrent, rTorrent, rTorrent-PS and PyroScope from source (refer to the [previous rTorrent setup guide]({% post_url 2016-02-12-rtorrent-seedbox %}) for more info):
 
