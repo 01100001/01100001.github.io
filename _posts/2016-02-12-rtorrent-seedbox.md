@@ -6,6 +6,8 @@ updated: 2016-03-07T19:19:56+00:00
 order: 4
 ---
 
+*This should be considered a learning excercise for [setting up rTorrent-PS with PyroCore]({% post_url 2016-02-17-rtorrent-ps-seedbox %}), which IMHO is better. Get a gist of this notes to better understand the latter.*
+
 ### Prep System For Building Packages
 
 Make sure that your system is up-to-date:

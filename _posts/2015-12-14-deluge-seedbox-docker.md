@@ -34,7 +34,7 @@ First things first:
 
 - Create a new sudo user; then impersonate the user:
 
-		adduser --home /torrents/dinky dinky
+		adduser --home /torrents/deluge dinky
 		adduser dinky sudo
 		su dinky
 
