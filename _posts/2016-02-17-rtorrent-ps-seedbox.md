@@ -6,9 +6,9 @@ updated: 2016-02-20T19:19:37+00:00
 order: 5
 ---
 
-> The [rTorrent seedbox setup guide]({% post_url 2016-02-12-rtorrent-seedbox %}) is also the basis of this guide, so please go and get the gist of it first.
+*The [rTorrent seedbox setup guide]({% post_url 2016-02-12-rtorrent-seedbox %}) is also the basis of this guide, so please go and get the gist of it first.*
 
-Now, let's begin by creating a Docker container on the server in which to run rTorrent-PS (or simply, rTorrent):
+Let's begin by creating a Docker container on the server in which to run rTorrent-PS (or simply, rTorrent):
 
 	docker run -d -i -t --name="rtorrent" -h="rtorrent" -p 54324:54324 -p 54324:54324/udp -p 54325:54325 -p 54325:54325/udp -v /home/pinky/torrents:/torrents -e "LANG="en_US.UTF-8"" -e "LANGUAGE="en_US:en"" --restart=always ubuntu:trusty /bin/bash
 
