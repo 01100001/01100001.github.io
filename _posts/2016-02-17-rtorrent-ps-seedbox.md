@@ -108,9 +108,9 @@ First, create directories for the instance `rtorrent1`, then get the simple star
 	# Make the start script executable
 	chmod a+x ./start
 
-> Instead of naming the rTorrent instances ambiguously such as rtorrent1, rtorrent2, etc., I'd recommend naming them after the category of torrents or the tracker.
+> Instead of naming the rTorrent instances ambiguously such as rtorrent1, rtorrent2, etc., I'd recommend naming them after the category of torrents or the tracker for which the instance is dedicated.
 > 
-> And if you plan to take this route, you could set the sudo user's home directory to `/torrents/rtorrent` as well. That is, instead of this as detailed in one of the earliest steps:
+> And if you plan to take this route, you might as well set the sudo user's home directory to `/torrents/rtorrent`. That is, instead of this as detailed in one of the earliest steps:
 > 
 > 	adduser --home /torrents/rtbox dinky
 > 
